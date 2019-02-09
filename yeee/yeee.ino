@@ -44,6 +44,7 @@ void loop() {
   numlampeggi = Serial.readString().toInt();
   Serial.println(numlampeggi);
  resto = durataSemaforo/2 - 2*durataG; 
+ controllo();
  fase1();
  fase2();
  fase3();
@@ -56,7 +57,30 @@ void loop() {
   delay(resto);
   lampeggio2();
 }
-
+void controllo()
+{
+  if(durataSemaforo < lampeggio ||durataSemaforo < resto ||durataSemaforo < durataG)
+  {
+    Serial.println("TEMPI NON VALIDI!!");
+    for(int i = 0;i < 10;i++)
+    {
+         digitalWrite(rosso1, HIGH);
+  digitalWrite(verde2, HIGH);
+  digitalWrite(rosso2, HIGH);
+  digitalWrite(verde1, HIGH);
+  digitalWrite(giallo1, HIGH);
+  digitalWrite(giallo2, HIGH);
+  delay(100);
+      digitalWrite(rosso1, LOW);
+  digitalWrite(verde2, LOW);
+  digitalWrite(rosso2, LOW);
+  digitalWrite(verde1, LOW);
+  digitalWrite(giallo1, LOW);
+  digitalWrite(giallo2, LOW);
+  delay(100);
+    }
+  }
+}
 void fase2()
 {
   digitalWrite(giallo1, HIGH);
@@ -109,4 +133,3 @@ for(int i = 0; i < numlampeggi;i++)
   }
   digitalWrite(verde2, LOW);
 }
-void controllo 
