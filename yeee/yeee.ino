@@ -17,36 +17,33 @@ pinMode(verde2, OUTPUT);
  pinMode(giallo2, OUTPUT);
   pinMode(rosso2, OUTPUT);
     Serial.begin(9600);
-  pinMode(13, OUTPUT); // Primo rosso
-  pinMode(12, OUTPUT); // Primo giallo
-  pinMode(11, OUTPUT); // Primo verde
-  pinMode(4, OUTPUT); // Secondo verde
-  pinMode(3, OUTPUT); // Secondo giallo
-  pinMode(2, OUTPUT); // Secondo rosso
+  pinMode(13, OUTPUT);
+  pinMode(12, OUTPUT);
+  pinMode(11, OUTPUT);
+  pinMode(4, OUTPUT);
+  pinMode(3, OUTPUT); 
+  pinMode(2, OUTPUT); 
   // put your setup code here, to run once:  
 }
 void loop() {
   // put your main code here, to run repeatedly:
  Serial.println("Inserire la durata del semaforo");
   while(Serial.available() == 0) {}
-  int durataSemaforo = Serial.readString().toInt();
+  durataSemaforo = Serial.readString().toInt();
  Serial.println(durataSemaforo); 
   Serial.println("Inserire la durata del giallo");
   while(Serial.available() == 0) {}
-  int durataG = Serial.readString().toInt();
+  durataG = Serial.readString().toInt();
   Serial.println(durataG);
   Serial.println("Inserire il delay del lampeggio");
   while(Serial.available() == 0) {}
-  int lampeggio = Serial.readString().toInt();
+  lampeggio = Serial.readString().toInt();
   Serial.println(lampeggio);
     Serial.println("Inserire il numero di lampeggi");
   while(Serial.available() == 0) {}
-  int numlampeggi = Serial.readString().toInt();
+  numlampeggi = Serial.readString().toInt();
   Serial.println(numlampeggi);
- resto = durataSemaforo - (2*(numlampeggi*lampeggio)+ durataG); 
-   Serial.println(lampeggio);
-   Serial.println(durataG);
-     Serial.println(numlampeggi);
+ resto = durataSemaforo/2 - 2*durataG; 
  fase1();
  fase2();
  fase3();
@@ -102,6 +99,7 @@ void lampeggio1()
 
 void lampeggio2()
 {
+  Serial.println(numlampeggi);
 for(int i = 0; i < numlampeggi;i++)
   {
     digitalWrite(verde2, LOW);
@@ -110,4 +108,5 @@ for(int i = 0; i < numlampeggi;i++)
     delay(lampeggio);
   }
   digitalWrite(verde2, LOW);
-} 
+}
+void controllo 
